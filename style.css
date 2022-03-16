@@ -1,0 +1,33 @@
+h1{
+    text-align: center;
+    font-family: Arial,serif;
+}
+.addTask{
+    display: flex;
+
+}
+#input-task{
+    border: none;
+    border-bottom: 2px solid; width: 50%;
+}
+#add-task-button{
+    background-color: darkorchid;
+    color: #fff;
+    font-weight: 700;
+    padding: 10px;
+    margin: 0 0 0 5px;
+}
+.delete-btn{
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+    background-color: red;
+    border: none;
+    color: #fff;
+    font-size: 10px;
+    line-height: 10px;
+    padding: 2px;
+}
+input:checked + span {
+    text-decoration: line-through;
+}
