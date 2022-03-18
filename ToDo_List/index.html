@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+<div class="wrapper">
+
+    <h1><b>To-Do List</b></h1>
+
+    <div class="addTask">
+        <input type="text" placeholder="add a new task..." id="input-task">
+        <button type="submit" onclick="addTask()" id="add-task-button">ADD TASK</button>
+    </div>
+
+    <div class="todo-wrapper">
+        <div class="list">
+              <ul id="task-list"></ul>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    let list = document.querySelector("ul");
+    list.addEventListener('click', function (event){
+       if(event.target.tagName ==='input-li') {
+           event.target.classList.toggle('checked');
+
+           toLocal();
+           console.log(list);
+       } else if (event.target.className === 'delete-btn') {
+           event.target.parentNode.remove();
+           toLocal();
+       }
+    }, false);
+
+    let todos;
+
+    function toLocal(){
+        todos = list.innerHTML;// Получаем список задач в виде строки
+        localStorage.setItem('todos', todos);//Сохраняем пару ключ/значение в локальном хранилище
+    }
+
+    let inputTask = document.getElementById("input-task");//Получаем задание, введенное пользователем
+    let elemUL = document.getElementById('task-list');
+
+    function addTask() {
+        if(inputTask.value !== ""){
+            let newTask = inputTask.value; //Присваиваем переменной newTask значение введенное в строку ввода
+            elemUL.insertAdjacentHTML(
+                "beforeend",
+                `<li>
+                   <input type="checkbox" id="input-li"> <span class = "task">${newTask}</span>
+                   <button class="delete-btn">X</button>
+                </li>`
+            );
+        } else alert("Add a new task!");
+        inputTask.value = "";
+        toLocal();
+    }
+
+    if(localStorage.getItem('todos')){
+         list.innerHTML = localStorage.getItem('todos');
+    }
+
+</script>
+</body>
+</html>
